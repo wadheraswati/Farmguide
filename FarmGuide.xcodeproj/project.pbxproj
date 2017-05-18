@@ -10,9 +10,12 @@
 		D9F16FE91ECD672C0077CCC2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F16FE81ECD672C0077CCC2 /* main.m */; };
 		D9F16FEC1ECD672C0077CCC2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F16FEB1ECD672C0077CCC2 /* AppDelegate.m */; };
 		D9F16FEF1ECD672C0077CCC2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F16FEE1ECD672C0077CCC2 /* ViewController.m */; };
-		D9F16FF21ECD672C0077CCC2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9F16FF01ECD672C0077CCC2 /* Main.storyboard */; };
 		D9F16FF41ECD672C0077CCC2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9F16FF31ECD672C0077CCC2 /* Assets.xcassets */; };
 		D9F16FF71ECD672C0077CCC2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9F16FF51ECD672C0077CCC2 /* LaunchScreen.storyboard */; };
+		D9F170071ECD6AB40077CCC2 /* JVFloatingDrawerSpringAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F170021ECD6AB40077CCC2 /* JVFloatingDrawerSpringAnimator.m */; };
+		D9F170081ECD6AB40077CCC2 /* JVFloatingDrawerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F170041ECD6AB40077CCC2 /* JVFloatingDrawerView.m */; };
+		D9F170091ECD6AB40077CCC2 /* JVFloatingDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F170061ECD6AB40077CCC2 /* JVFloatingDrawerViewController.m */; };
+		D9F1700D1ECD6B5D0077CCC2 /* SidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F1700C1ECD6B5D0077CCC2 /* SidebarViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,10 +25,18 @@
 		D9F16FEB1ECD672C0077CCC2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		D9F16FED1ECD672C0077CCC2 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		D9F16FEE1ECD672C0077CCC2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		D9F16FF11ECD672C0077CCC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D9F16FF31ECD672C0077CCC2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D9F16FF61ECD672C0077CCC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D9F16FF81ECD672C0077CCC2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D9F170001ECD6AB40077CCC2 /* JVFloatingDrawerAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVFloatingDrawerAnimation.h; sourceTree = "<group>"; };
+		D9F170011ECD6AB40077CCC2 /* JVFloatingDrawerSpringAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVFloatingDrawerSpringAnimator.h; sourceTree = "<group>"; };
+		D9F170021ECD6AB40077CCC2 /* JVFloatingDrawerSpringAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVFloatingDrawerSpringAnimator.m; sourceTree = "<group>"; };
+		D9F170031ECD6AB40077CCC2 /* JVFloatingDrawerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVFloatingDrawerView.h; sourceTree = "<group>"; };
+		D9F170041ECD6AB40077CCC2 /* JVFloatingDrawerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVFloatingDrawerView.m; sourceTree = "<group>"; };
+		D9F170051ECD6AB40077CCC2 /* JVFloatingDrawerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVFloatingDrawerViewController.h; sourceTree = "<group>"; };
+		D9F170061ECD6AB40077CCC2 /* JVFloatingDrawerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVFloatingDrawerViewController.m; sourceTree = "<group>"; };
+		D9F1700B1ECD6B5D0077CCC2 /* SidebarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarViewController.h; sourceTree = "<group>"; };
+		D9F1700C1ECD6B5D0077CCC2 /* SidebarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,11 +69,12 @@
 		D9F16FE61ECD672C0077CCC2 /* FarmGuide */ = {
 			isa = PBXGroup;
 			children = (
+				D9F1700F1ECD6C100077CCC2 /* Model */,
+				D9F1700E1ECD6C0A0077CCC2 /* Views */,
+				D9F1700A1ECD6B340077CCC2 /* Controllers */,
+				D9F16FFE1ECD6A920077CCC2 /* ExternalLibraries */,
 				D9F16FEA1ECD672C0077CCC2 /* AppDelegate.h */,
 				D9F16FEB1ECD672C0077CCC2 /* AppDelegate.m */,
-				D9F16FED1ECD672C0077CCC2 /* ViewController.h */,
-				D9F16FEE1ECD672C0077CCC2 /* ViewController.m */,
-				D9F16FF01ECD672C0077CCC2 /* Main.storyboard */,
 				D9F16FF31ECD672C0077CCC2 /* Assets.xcassets */,
 				D9F16FF51ECD672C0077CCC2 /* LaunchScreen.storyboard */,
 				D9F16FF81ECD672C0077CCC2 /* Info.plist */,
@@ -77,6 +89,53 @@
 				D9F16FE81ECD672C0077CCC2 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D9F16FFE1ECD6A920077CCC2 /* ExternalLibraries */ = {
+			isa = PBXGroup;
+			children = (
+				D9F16FFF1ECD6AB40077CCC2 /* JVFloatingDrawer */,
+			);
+			path = ExternalLibraries;
+			sourceTree = "<group>";
+		};
+		D9F16FFF1ECD6AB40077CCC2 /* JVFloatingDrawer */ = {
+			isa = PBXGroup;
+			children = (
+				D9F170001ECD6AB40077CCC2 /* JVFloatingDrawerAnimation.h */,
+				D9F170011ECD6AB40077CCC2 /* JVFloatingDrawerSpringAnimator.h */,
+				D9F170021ECD6AB40077CCC2 /* JVFloatingDrawerSpringAnimator.m */,
+				D9F170031ECD6AB40077CCC2 /* JVFloatingDrawerView.h */,
+				D9F170041ECD6AB40077CCC2 /* JVFloatingDrawerView.m */,
+				D9F170051ECD6AB40077CCC2 /* JVFloatingDrawerViewController.h */,
+				D9F170061ECD6AB40077CCC2 /* JVFloatingDrawerViewController.m */,
+			);
+			path = JVFloatingDrawer;
+			sourceTree = "<group>";
+		};
+		D9F1700A1ECD6B340077CCC2 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D9F16FED1ECD672C0077CCC2 /* ViewController.h */,
+				D9F16FEE1ECD672C0077CCC2 /* ViewController.m */,
+				D9F1700B1ECD6B5D0077CCC2 /* SidebarViewController.h */,
+				D9F1700C1ECD6B5D0077CCC2 /* SidebarViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		D9F1700E1ECD6C0A0077CCC2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D9F1700F1ECD6C100077CCC2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,7 +198,6 @@
 			files = (
 				D9F16FF71ECD672C0077CCC2 /* LaunchScreen.storyboard in Resources */,
 				D9F16FF41ECD672C0077CCC2 /* Assets.xcassets in Resources */,
-				D9F16FF21ECD672C0077CCC2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,8 +208,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9F170071ECD6AB40077CCC2 /* JVFloatingDrawerSpringAnimator.m in Sources */,
 				D9F16FEF1ECD672C0077CCC2 /* ViewController.m in Sources */,
+				D9F170091ECD6AB40077CCC2 /* JVFloatingDrawerViewController.m in Sources */,
+				D9F1700D1ECD6B5D0077CCC2 /* SidebarViewController.m in Sources */,
 				D9F16FEC1ECD672C0077CCC2 /* AppDelegate.m in Sources */,
+				D9F170081ECD6AB40077CCC2 /* JVFloatingDrawerView.m in Sources */,
 				D9F16FE91ECD672C0077CCC2 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -159,14 +221,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		D9F16FF01ECD672C0077CCC2 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D9F16FF11ECD672C0077CCC2 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		D9F16FF51ECD672C0077CCC2 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

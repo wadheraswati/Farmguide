@@ -13,9 +13,19 @@
 @end
 
 @implementation AppDelegate
-
+@synthesize drawerViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    drawerViewController = [[JVFloatingDrawerViewController alloc] initWithNibName:nil bundle:nil];
+    drawerViewController.leftViewController = [[SidebarViewController alloc] init];
+    drawerViewController.centerViewController = [[ViewController alloc] init];
+    drawerViewController.view.clipsToBounds = YES;
+    drawerViewController.animator = [[JVFloatingDrawerSpringAnimator alloc] init];
+    
+    [self.window setRootViewController:drawerViewController];
+    [self.window makeKeyAndVisible];
+    
     // Override point for customization after application launch.
     return YES;
 }

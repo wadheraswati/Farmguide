@@ -7,10 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ViewController.h"
+#import "JVFloatingDrawerViewController.h"
+#import "JVFloatingDrawerSpringAnimator.h"
+#import "SidebarViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, strong) ViewController *viewController;
+@property (nonatomic, retain) JVFloatingDrawerViewController *drawerViewController;
 
 
 @end
