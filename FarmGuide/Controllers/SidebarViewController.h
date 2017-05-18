@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppManager.h"
 
-@interface SidebarViewController : UIViewController
+@interface SidebarViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+{
+    NSArray *categories;
+    
+}
+
+@property (nonatomic, retain) UITableView *tableView;
+@property (strong, atomic) ALAssetsLibrary* library;
 
 @end

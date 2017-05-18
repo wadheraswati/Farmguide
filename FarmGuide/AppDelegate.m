@@ -17,10 +17,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    [[AppManager sharedManager] setUserProfile];
+
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+
     drawerViewController = [[JVFloatingDrawerViewController alloc] initWithNibName:nil bundle:nil];
     drawerViewController.leftViewController = [[SidebarViewController alloc] init];
-    drawerViewController.centerViewController = [[ViewController alloc] init];
+    drawerViewController.centerViewController = [[ProfileViewController alloc] init];
     drawerViewController.view.clipsToBounds = YES;
+    drawerViewController.backgroundImage = [self squareImageWithColor:kPrimaryWhiteColor dimension:10];
     drawerViewController.animator = [[JVFloatingDrawerSpringAnimator alloc] init];
     
     [self.window setRootViewController:drawerViewController];
@@ -28,6 +34,20 @@
     
     // Override point for customization after application launch.
     return YES;
+}
+
+- (UIImage *)squareImageWithColor:(UIColor *)color dimension:(int)dimension {
+    CGRect rect = CGRectMake(0, 0, dimension, dimension);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
 }
 
 

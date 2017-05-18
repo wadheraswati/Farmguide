@@ -11,6 +11,7 @@
 #import "JVFloatingDrawerViewController.h"
 #import "JVFloatingDrawerSpringAnimator.h"
 #import "SidebarViewController.h"
+#import "ProfileViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
