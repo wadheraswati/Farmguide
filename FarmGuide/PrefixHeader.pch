@@ -15,5 +15,9 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "AppConstants.h"
 #import "AppManager.h"
+#import "AppDelegate.h"
+#import "UIImage+FX.h"
+
+#define APPDELEGATE ((AppDelegate *)[UIApplication sharedApplication].delegate)
 
 #endif /* PrefixHeader_pch */

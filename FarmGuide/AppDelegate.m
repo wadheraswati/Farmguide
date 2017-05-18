@@ -24,7 +24,7 @@
 
     drawerViewController = [[JVFloatingDrawerViewController alloc] initWithNibName:nil bundle:nil];
     drawerViewController.leftViewController = [[SidebarViewController alloc] init];
-    drawerViewController.centerViewController = [[ProfileViewController alloc] init];
+    drawerViewController.centerViewController = [[UINavigationController alloc] initWithRootViewController:[[ViewController alloc] init]];
     drawerViewController.view.clipsToBounds = YES;
     drawerViewController.backgroundImage = [self squareImageWithColor:kPrimaryWhiteColor dimension:10];
     drawerViewController.animator = [[JVFloatingDrawerSpringAnimator alloc] init];

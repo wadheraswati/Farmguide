@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "AppManager.h"
+#import "ProfileViewController.h"
 
 @interface SidebarViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 {

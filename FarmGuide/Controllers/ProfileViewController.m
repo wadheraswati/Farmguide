@@ -16,8 +16,15 @@
 
 - (void)viewDidLoad {
     
+    self.navigationItem.title = @"Profile";
+    
     self.library = [[ALAssetsLibrary alloc] init];
     items = [NSArray arrayWithObjects:@{@"name":@"Name",@"type":@"1"},@{@"name":@"Gender",@"type":@"2"},@{@"name":@"Contact",@"type":@"3"},@{@"name":@"Date of Birth",@"type":@"4"},nil];
+    
+    NSDictionary *barButtonAttributes = @{NSFontAttributeName: [UIFont fontWithName:@"googleicon" size:21.0f], NSForegroundColorAttributeName: kTertiaryBlackColor};
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
+    [backButton setTitleTextAttributes:barButtonAttributes forState:UIControlStateNormal];
+    self.navigationItem.leftBarButtonItem = backButton;
     
     self.profileImgV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 20, self.view.bounds.size.width, self.view.bounds.size.width*(float)9/16)];
     [self.profileImgV setContentMode:UIViewContentModeScaleAspectFill];
@@ -54,6 +61,9 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)goBack {
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource Methods -
 
