@@ -24,9 +24,9 @@
 #define kSecondaryBlackColor [UIColor colorWithRed:144/255.0 green:144/255.0 blue:144/255.0 alpha:1.0]
 
 #define kTertiaryBlackColor [UIColor colorWithRed:37.0/255.0 green:37.0/255.0 blue:37.0/255.0 alpha:1]
-
-
 #define kTertiaryWhiteColor [UIColor colorWithRed:189.0/255.0 green:195.0/255.0 blue:199.0/255.0 alpha:1]
 
+// Observers
+#define kProfileUpdateObserver @"kProfileUpdateObserver"
 
 #endif /* AppConstants_h */

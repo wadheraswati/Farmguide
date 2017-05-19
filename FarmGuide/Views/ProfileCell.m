@@ -17,14 +17,14 @@
     if (self) {
         
         nameLbl = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, self.bounds.size.width - 10, 25)];
-        [nameLbl setFont:[UIFont systemFontOfSize:14]];
+        [nameLbl setFont:[UIFont systemFontOfSize:16]];
         [nameLbl setTextAlignment:NSTextAlignmentLeft];
         [nameLbl setTextColor:[UIColor blackColor]];
         [nameLbl setNumberOfLines:1];
         [self addSubview:nameLbl];
         
         valueField = [[UITextField alloc] initWithFrame:CGRectMake(5, nameLbl.frame.origin.y + nameLbl.frame.size.height + 5, self.bounds.size.width - 10, 25)];
-        [valueField setFont:[UIFont systemFontOfSize:12]];
+        [valueField setFont:[UIFont systemFontOfSize:15]];
         [valueField setTextColor:[kPrimaryBlackColor colorWithAlphaComponent:0.8]];
         [valueField setTextAlignment:NSTextAlignmentLeft];
         [valueField setAutocorrectionType:UITextAutocorrectionTypeNo];

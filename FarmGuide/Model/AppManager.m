@@ -29,11 +29,14 @@
     self.profile = [[DBManager sharedManager] getUserProfile];
 }
 
-- (void)updateUserProfile {
+- (BOOL)updateUserProfile {
     if(![[DBManager sharedManager] saveUserProfile:self.profile])
     {
+        self.profile = [[DBManager sharedManager] getUserProfile];
         [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Oops..Could not save the detail for now. Please try again later" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+        return NO;
     }
+    return YES;
 }
 
 @end

@@ -16,6 +16,7 @@
     
 }
 
+@property (nonatomic, strong) id updateObserver;
 @property (nonatomic, retain) UITableView *tableView;
 @property (strong, atomic) ALAssetsLibrary* library;
 

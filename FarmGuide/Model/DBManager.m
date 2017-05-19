@@ -86,7 +86,7 @@
         profile.name = [NSString stringWithUTF8String:(char *) sqlite3_column_text(sqlStatement,1)];
         profile.gender = [NSString stringWithUTF8String:(char *) sqlite3_column_text(sqlStatement,2)];
         profile.imageURL = [NSString stringWithUTF8String:(char *) sqlite3_column_text(sqlStatement,3)];
-        profile.contact = sqlite3_column_int(sqlStatement, 4);
+        profile.contact = sqlite3_column_int64(sqlStatement, 4);
         profile.dob = [NSString stringWithUTF8String:(char *) sqlite3_column_text(sqlStatement,5)];
     }
     

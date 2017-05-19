@@ -13,6 +13,7 @@
 @end
 
 @implementation SidebarViewController
+@synthesize updateObserver;
 
 - (void)viewDidLoad {
     
@@ -28,6 +29,10 @@
     [self.view addSubview:self.tableView];
     
     self.library = [[ALAssetsLibrary alloc] init];
+    
+    updateObserver = [[NSNotificationCenter defaultCenter] addObserverForName:kProfileUpdateObserver object:nil queue:nil usingBlock:^(NSNotification *note) {
+        [self.tableView reloadData];
+    }];
     
     [super viewDidLoad];
     // Do any additional setup after loading the view.

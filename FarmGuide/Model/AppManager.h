@@ -20,6 +20,6 @@ typedef void(^GetImageCompletion)(UIImage *image, NSString* error);
 @property (nonatomic, retain) UserProfile *profile;
 
 - (void)setUserProfile;
-- (void)updateUserProfile;
+- (BOOL)updateUserProfile;
 
 @end
