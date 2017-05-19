@@ -20,4 +20,6 @@
 
 #define APPDELEGATE ((AppDelegate *)[UIApplication sharedApplication].delegate)
 
+#define GMSCLIENT_API_KEY @"AIzaSyA0Gw1pChEGIuAwoLmBfR7_qo-2j0KoWtM"
+
 #endif /* PrefixHeader_pch */

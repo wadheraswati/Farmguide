@@ -19,7 +19,7 @@
     
     self.view.backgroundColor = [UIColor greenColor];
     
-    categories = [NSMutableArray arrayWithObjects:@"Profile", @"Completed Forms", @"Incomplete Forms", @"Map", nil];
+    categories = [NSMutableArray arrayWithObjects:@"Completed Forms", @"Incomplete Forms", @"Map", nil];
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 20, 280, self.view.frame.size.height - 20)];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
@@ -94,7 +94,13 @@
     }
     else
     {
-        
+        if(indexPath.row == 2) {
+            MapViewController *mapView = [[MapViewController alloc] init];
+            UINavigationController *mapNav = [[UINavigationController alloc] initWithRootViewController:mapView];
+            [APPDELEGATE.drawerViewController toggleDrawerWithSide:JVFloatingDrawerSideLeft animated:YES completion:^(BOOL finished) {
+                [APPDELEGATE.drawerViewController.centerViewController presentViewController:mapNav animated:YES completion:nil];
+            }];
+        }
     }
 }
 

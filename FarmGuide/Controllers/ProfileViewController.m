@@ -222,6 +222,13 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
+    if(textField.tag == 1)
+    {
+        if(![self isNameEnteredFine:textField.text]) {
+            [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Oops.. Please enter a valid name" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+            textField.text = [NSString stringWithFormat:@"%@",[[AppManager sharedManager] profile].name];
+        }
+    }
     if(textField.tag == 3)
     {
         if(![self validateNumber:textField.text])
@@ -289,6 +296,12 @@
     NSPredicate *test = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneRegex];
     BOOL matches = [test evaluateWithObject:string];
     return matches;
+}
+
+- (BOOL)isNameEnteredFine:(NSString *)name {
+    if(name.length >= 4 && name.length <= 75)
+        return YES;
+    return NO;
 }
 
 #pragma mark - Helper Methods -
