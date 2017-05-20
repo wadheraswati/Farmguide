@@ -10,6 +10,7 @@
 #import "AppManager.h"
 #import "ProfileViewController.h"
 #import "MapViewController.h"
+#import "FormListViewController.h"
 
 @interface SidebarViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 {

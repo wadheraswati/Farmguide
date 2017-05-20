@@ -25,8 +25,9 @@
 
 - (BOOL)saveUserProfile:(UserProfile *)profile;
 - (UserProfile *)getUserProfile;
-- (void)createForm:(Form *)form;
+- (BOOL)createForm:(Form *)form;
 - (BOOL)updateForm:(Form *)form WithID:(NSUInteger)formID;
+- (NSArray <Form *> *)getFormsWithStatus:(NSString *)status;
 - (Form *)getFormWithID:(NSUInteger)formID;
 
 @end

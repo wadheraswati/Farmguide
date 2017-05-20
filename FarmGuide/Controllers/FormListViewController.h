@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FormListViewController : UIViewController
+@interface FormListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+{
+    UITableView *forms;
+    NSArray <Form *> *formList;
+}
+
+@property (nonatomic, retain) NSString *status;
 
 @end

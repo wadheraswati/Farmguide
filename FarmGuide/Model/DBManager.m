@@ -93,29 +93,39 @@
     return profile;
 }
 
-- (void)createForm:(Form *)form {
+- (BOOL)createForm:(Form *)form {
+    
+    [self openDB];
     
     NSString *insertSQL = [NSString stringWithFormat:
                            @"INSERT into Forms(name, mobNumPrimary, mobNumSecondary, dob, sex, address, land, bank, status) values(\"%@\",%lu, %lu,\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",%lu);" ,
-                           form.name, form.mobNumPrimary, form.mobNumSecondary, form.dob, form.gender, form.address, form.land, form.bank, form.status];
+                           form.name, (unsigned long)form.mobNumPrimary, (unsigned long)form.mobNumSecondary, form.dob, form.gender, form.address, form.land, form.bank, (unsigned long)form.status];
     
     const char *sql = [insertSQL UTF8String];
     sqlite3_stmt *sqlStatement;
+
     if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK)
     {
         NSLog(@"Problem with prepare statement");
+        NSLog(@"%s Prepare failure '%s' (%1d)", __FUNCTION__, sqlite3_errmsg(db), sqlite3_errcode(db));
+
+        return NO;
     }
     
     sqlite3_open([self.databaseFilePath UTF8String], &db);
     sqlite3_step(sqlStatement);
     sqlite3_finalize(sqlStatement);
     sqlite3_close(db);
+    
+    return YES;
 }
 
 - (BOOL)updateForm:(Form *)form WithID:(NSUInteger)formID {
     
+    [self openDB];
+    
     NSString *insertSQL = [NSString stringWithFormat:
-                           @"UPDATE UserProfile SET name = \"%@\", mobNumPrimary = %lu, mobNumSecondary = %lu, dob = \"%@\", sex = \"%@\", address = \"%@\", land = \"%@\", bank = \"%@\", status = %lu WHERE id = %lu", form.name, form.mobNumPrimary, form.mobNumSecondary, form.dob, form.gender, form.address, form.land, form.bank, formID, form.status];
+                           @"UPDATE Forms SET name = \"%@\", mobNumPrimary = %lu, mobNumSecondary = %lu, dob = \"%@\", sex = \"%@\", address = \"%@\", land = \"%@\", bank = \"%@\", status = %lu WHERE id = %lu", form.name, (unsigned long)form.mobNumPrimary, (unsigned long)form.mobNumSecondary, form.dob, form.gender, form.address, form.land, form.bank, (unsigned long)form.status, formID];
 
     const char *sql = [insertSQL UTF8String];
     sqlite3_stmt *sqlStatement;
@@ -133,10 +143,10 @@
     return YES;
 }
 
-- (Form *)getFormWithID:(NSString *)formID {
+- (Form *)getFormWithID:(NSUInteger )formID {
     [self openDB];
     
-    NSString *insertSQL = [NSString stringWithFormat:@"SELECT * from Forms where id = %@",formID];
+    NSString *insertSQL = [NSString stringWithFormat:@"SELECT * from Forms where id = %lu",formID];
     const char *sql = [insertSQL UTF8String];
     sqlite3_stmt *sqlStatement;
     if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK)
@@ -160,6 +170,35 @@
     
     return formObj;
 
+}
+
+- (NSArray <Form *> *)getFormsWithStatus:(NSString *)status {
+    [self openDB];
+    
+    NSString *insertSQL = [NSString stringWithFormat:@"SELECT * from Forms where status = %@",status];
+    const char *sql = [insertSQL UTF8String];
+    sqlite3_stmt *sqlStatement;
+    if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK)
+    {
+        NSLog(@"Problem with prepare statement");
+    }
+    
+    NSMutableArray <Form *> *forms = [NSMutableArray array];
+    while (sqlite3_step(sqlStatement)==SQLITE_ROW) {
+        Form *formObj = [[Form alloc]init];
+        formObj.formID = sqlite3_column_int(sqlStatement, 0);
+        formObj.name = [NSString stringWithUTF8String:(char *) sqlite3_column_text(sqlStatement,1)];
+        formObj.mobNumPrimary = sqlite3_column_int64(sqlStatement, 2);
+        formObj.mobNumSecondary = sqlite3_column_int64(sqlStatement, 3);
+        formObj.dob = [NSString stringWithUTF8String:(char *) sqlite3_column_text(sqlStatement,4)];
+        formObj.gender = [NSString stringWithUTF8String:(char *) sqlite3_column_text(sqlStatement,5)];
+        formObj.address = [NSString stringWithUTF8String:(char *) sqlite3_column_text(sqlStatement,6)];
+        formObj.land = [NSString stringWithUTF8String:(char *) sqlite3_column_text(sqlStatement,7)];
+        formObj.bank = [NSString stringWithUTF8String:(char *) sqlite3_column_text(sqlStatement,8)];
+        [forms addObject:formObj];
+    }
+    
+    return forms;
 }
 
 

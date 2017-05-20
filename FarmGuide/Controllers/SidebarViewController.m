@@ -94,6 +94,23 @@
     }
     else
     {
+        if(indexPath.row == 0) {
+            FormListViewController *formObj = [[FormListViewController alloc] init];
+            UINavigationController *formNav = [[UINavigationController alloc] initWithRootViewController:formObj];
+
+            [formObj setStatus:@"1"];
+            [APPDELEGATE.drawerViewController toggleDrawerWithSide:JVFloatingDrawerSideLeft animated:YES completion:^(BOOL finished) {
+                [APPDELEGATE.drawerViewController.centerViewController presentViewController:formNav animated:YES completion:nil];
+            }];
+        }
+        else if(indexPath.row == 1) {
+            FormListViewController *formObj = [[FormListViewController alloc] init];
+            UINavigationController *formNav = [[UINavigationController alloc] initWithRootViewController:formObj];
+            [formObj setStatus:@"0"];
+            [APPDELEGATE.drawerViewController toggleDrawerWithSide:JVFloatingDrawerSideLeft animated:YES completion:^(BOOL finished) {
+                [APPDELEGATE.drawerViewController.centerViewController presentViewController:formNav animated:YES completion:nil];
+            }];
+        }
         if(indexPath.row == 2) {
             MapViewController *mapView = [[MapViewController alloc] init];
             UINavigationController *mapNav = [[UINavigationController alloc] initWithRootViewController:mapView];

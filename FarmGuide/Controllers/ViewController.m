@@ -22,14 +22,19 @@
     self.view.backgroundColor = [UIColor greenColor];
     self.navigationItem.title = @"New Form";
     
-    UIButton *hamburgerButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [hamburgerButton setTitle:@"" forState:UIControlStateNormal];
-    [hamburgerButton addTarget:self action:@selector(showSideMenu) forControlEvents:UIControlEventTouchUpInside];
-    [hamburgerButton.titleLabel setFont:[UIFont fontWithName:@"googleicon" size:21.0f]];
-    [hamburgerButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [hamburgerButton setFrame:CGRectMake(0, 0, 44, 44)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:hamburgerButton];
-
+    if(self.formID){
+        
+    }
+    else {
+        UIButton *hamburgerButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        [hamburgerButton setTitle:@"" forState:UIControlStateNormal];
+        [hamburgerButton addTarget:self action:@selector(showSideMenu) forControlEvents:UIControlEventTouchUpInside];
+        [hamburgerButton.titleLabel setFont:[UIFont fontWithName:@"googleicon" size:21.0f]];
+        [hamburgerButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [hamburgerButton setFrame:CGRectMake(0, 0, 44, 44)];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:hamburgerButton];
+    }
+    
     UIBarButtonItem *saveBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save)];
     self.navigationItem.rightBarButtonItem = saveBtn;
     
@@ -43,6 +48,10 @@
     [formTable registerClass:[ProfileCell class] forCellReuseIdentifier:@"profileCell"];
     [self.view addSubview:formTable];
     
+    if(self.formID){
+        Form *form = [[DBManager sharedManager] getFormWithID:formID];
+        [self updateFormFieldsWithForm:form];
+    }
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
 }
@@ -50,6 +59,42 @@
 - (void)showSideMenu {
     [APPDELEGATE.drawerViewController toggleDrawerWithSide:JVFloatingDrawerSideLeft animated:YES completion:nil];
 }
+
+- (void)updateFormFieldsWithForm:(Form *)form {
+    for(int i = 0; i < [formTable numberOfRowsInSection:0]; i++) {
+        ProfileCell *cell = [formTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        switch (i) {
+            case 0:
+                [cell.valueField setText:form.name];
+                break;
+            case 1:
+                [cell.valueField setText:[NSString stringWithFormat:@"%lu",form.mobNumPrimary]];
+                break;
+            case 2:
+                [cell.valueField setText:[NSString stringWithFormat:@"%lu",form.mobNumSecondary]];
+                break;
+            case 3:
+                [cell.valueField setText:form.dob];
+                break;
+            case 4:
+                [cell.valueField setText:form.gender];
+                break;
+            case 5:
+                [cell.valueField setText:form.address];
+                break;
+            case 6:
+                [cell.valueField setText:form.land];
+                break;
+            case 7:
+                [cell.valueField setText:form.bank];
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+#pragma mark - UITableViewDelegate and UITableViewDataSource Methods -
 
 - (NSInteger)tableView:(UITableView *)tableView2 numberOfRowsInSection:(NSInteger)section {
         return 8;
@@ -123,12 +168,14 @@
         datePicker.datePickerMode = UIDatePickerModeDate;
         datePicker.backgroundColor = kSecondaryWhiteColor;
         datePicker.tag = 8;
+        datePicker.maximumDate = [NSDate date];
         datePicker.date = [NSDate date];
         [datePickerView addSubview:datePicker];
         
         UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, self.view.bounds.size.width*(float)9/16)];
         [pickerView setDelegate:self];
         [pickerView setDataSource:self];
+        [pickerView setTag:10];
         [pickerView setBackgroundColor:kSecondaryWhiteColor];
         [datePickerView addSubview:pickerView];
         
@@ -136,11 +183,23 @@
         toolBar.barStyle = UIBarStyleDefault;
         toolBar.translucent = YES;
         UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(setDOB)];
-        doneButton.tintColor = kPrimaryBlackColor;
-        [toolBar setItems:[NSArray arrayWithObjects:spacer, doneButton, spacer, nil]];
-        [datePickerView addSubview:toolBar];
         
+        if(indexPath.row == 3)
+        {
+            UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(setDOB)];
+            doneButton.tintColor = kPrimaryBlackColor;
+            [toolBar setItems:[NSArray arrayWithObjects:spacer, doneButton, spacer, nil]];
+        }
+        else
+        {
+            UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(setGender)];
+            doneButton.tintColor = kPrimaryBlackColor;
+            [toolBar setItems:[NSArray arrayWithObjects:spacer, doneButton, spacer, nil]];
+            
+        }
+        
+        [datePickerView addSubview:toolBar];
+
         [UIView animateWithDuration:0.25 animations:^{
             toolBar.frame = toolbarTargetFrame;
             if(indexPath.row == 3)
@@ -163,6 +222,16 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"dd-MM-YYYY"];
     [cell.valueField setText:[formatter stringFromDate:((UIDatePicker *)[datePickerView viewWithTag:8]).date]];
+    [UIView animateWithDuration:0.25 animations:^{
+        datePickerView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [datePickerView removeFromSuperview];
+    }];
+}
+
+- (void)setGender {
+    ProfileCell *cell = [formTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
+    [cell.valueField setText:gender[[((UIPickerView *)[datePickerView viewWithTag:10]) selectedRowInComponent:0]]];
     [UIView animateWithDuration:0.25 animations:^{
         datePickerView.alpha = 0;
     } completion:^(BOOL finished) {
@@ -208,13 +277,7 @@
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    if(textField.tag >= 6)
-    {
-        CGPoint location = [formTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]].frame.origin;
-        [formTable setContentOffset:location animated:YES];
-    }
-    else
-        [formTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:textField.tag - 1 inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+    [formTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:textField.tag - 1 inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
@@ -298,25 +361,59 @@
         form.land = land;
         form.bank = bank;
 
-        if([self validateNumber:mobNumPrimary] && [self validateNumber:mobNumSecondary] && address.length && land.length && bank.length){
-            form.status = 0;
-            [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Incomplete Data is saved. You can complete it later by viewing it in incomplete forms" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+        if(self.formID == 0)
+        {
+            if([self validateNumber:mobNumPrimary] && [self validateNumber:mobNumSecondary] && address.length && land.length && bank.length){
+                form.status = 1;
+            }
+            else
+            {
+                form.status = 0;
+                ;
+            }
+            if([[DBManager sharedManager] createForm:form])
+            {
+                form.status?[[[UIAlertView alloc] initWithTitle:@"Wohoo.." message:@"Form saved successfully" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil] show]:[[[UIAlertView alloc] initWithTitle:@"Error" message:@"Incomplete Data is saved. You can complete it later by viewing it in incomplete forms" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+                [self clearFields];
+            }
+            else
+            {
+                [[[UIAlertView alloc] initWithTitle:@"Error.." message:@"Could not save form" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+            }
+            
         }
         else
         {
-            form.status = 1;
-        }
-        if(self.formID == 0)
-            [[DBManager sharedManager] createForm:form];
-        else
-            [[DBManager sharedManager] updateForm:form WithID:formID];
+            if([self validateNumber:mobNumPrimary] && [self validateNumber:mobNumSecondary] && address.length && land.length && bank.length){
+                form.status = 1;
+                [[DBManager sharedManager] updateForm:form WithID:formID];
+            }
+            else
+            {
+                if(form.status)
+                {
+                    [[[UIAlertView alloc] initWithTitle:@"Error.." message:@"Please complete all details" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+                }
+                else{
+                    [[DBManager sharedManager] updateForm:form WithID:formID];
+                    [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Incomplete Data is saved. You can complete it later by viewing it in incomplete forms" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+                }
 
+            }
+        }
     }
     else
     {
         [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Oops.. Please enter Farmer's name" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
     }
 
+}
+
+- (void)clearFields {
+    for(int i = 0; i < [formTable numberOfRowsInSection:0]; i++) {
+        ProfileCell *cell = [formTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        [cell.valueField setText:@""];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {

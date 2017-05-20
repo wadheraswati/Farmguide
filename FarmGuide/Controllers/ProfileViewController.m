@@ -126,12 +126,14 @@
         datePicker.datePickerMode = UIDatePickerModeDate;
         datePicker.backgroundColor = kSecondaryWhiteColor;
         datePicker.tag = 8;
+        datePicker.maximumDate = [NSDate date];
         datePicker.date = [NSDate date];
         [datePickerView addSubview:datePicker];
         
         UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, self.view.bounds.size.width*(float)9/16)];
         [pickerView setDelegate:self];
         [pickerView setDataSource:self];
+        [pickerView setTag:10];
         [pickerView setBackgroundColor:kSecondaryWhiteColor];
         [datePickerView addSubview:pickerView];
         
@@ -139,9 +141,21 @@
         toolBar.barStyle = UIBarStyleDefault;
         toolBar.translucent = YES;
         UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(setDOB)];
-        doneButton.tintColor = kPrimaryBlackColor;
-        [toolBar setItems:[NSArray arrayWithObjects:spacer, doneButton, spacer, nil]];
+        
+        if(indexPath.row == 3)
+        {
+            UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(setDOB)];
+            doneButton.tintColor = kPrimaryBlackColor;
+            [toolBar setItems:[NSArray arrayWithObjects:spacer, doneButton, spacer, nil]];
+        }
+        else
+        {
+            UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(setGender)];
+            doneButton.tintColor = kPrimaryBlackColor;
+            [toolBar setItems:[NSArray arrayWithObjects:spacer, doneButton, spacer, nil]];
+
+        }
+        
         [datePickerView addSubview:toolBar];
         
         [UIView animateWithDuration:0.25 animations:^{
@@ -166,6 +180,16 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"dd-MM-YYYY"];
     [cell.valueField setText:[formatter stringFromDate:((UIDatePicker *)[datePickerView viewWithTag:8]).date]];
+    [UIView animateWithDuration:0.25 animations:^{
+        datePickerView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [datePickerView removeFromSuperview];
+    }];
+}
+
+- (void)setGender {
+    ProfileCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    [cell.valueField setText:gender[[((UIPickerView *)[datePickerView viewWithTag:10]) selectedRowInComponent:0]]];
     [UIView animateWithDuration:0.25 animations:^{
         datePickerView.alpha = 0;
     } completion:^(BOOL finished) {
