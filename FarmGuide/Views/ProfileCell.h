@@ -14,6 +14,7 @@
 }
 @property (nonatomic, retain) UILabel *nameLbl;
 @property (nonatomic, retain) UITextField *valueField;
+@property (nonatomic, retain) UIButton *addBtn;
 @property (nonatomic, assign) NSUInteger type;
 
 @end

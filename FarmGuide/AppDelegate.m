@@ -20,7 +20,6 @@
     
     [[AppManager sharedManager] setUserProfile];
 
-    
     [GMSPlacesClient provideAPIKey:GMSCLIENT_API_KEY];
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -33,8 +32,8 @@
     drawerViewController.backgroundImage = [self squareImageWithColor:kPrimaryWhiteColor dimension:10];
     drawerViewController.animator = [[JVFloatingDrawerSpringAnimator alloc] init];
     
-    //[self.window setRootViewController:drawerViewController];
-    [self.window setRootViewController:[[UINavigationController alloc] initWithRootViewController:[[MapViewController alloc] init]]];
+    [self.window setRootViewController:drawerViewController];
+    //[self.window setRootViewController:[[UINavigationController alloc] initWithRootViewController:[[ViewController alloc] init]]];
     [self.window makeKeyAndVisible];
     
     // Override point for customization after application launch.

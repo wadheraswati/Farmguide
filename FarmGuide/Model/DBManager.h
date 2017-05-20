@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
 #import "UserProfile.h"
+#import "Form.h"
 
 @interface DBManager : NSObject
 {
@@ -24,5 +25,8 @@
 
 - (BOOL)saveUserProfile:(UserProfile *)profile;
 - (UserProfile *)getUserProfile;
+- (void)createForm:(Form *)form;
+- (BOOL)updateForm:(Form *)form WithID:(NSUInteger)formID;
+- (Form *)getFormWithID:(NSUInteger)formID;
 
 @end

@@ -8,8 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
+{
+    UITableView *formTable;
+    
+    NSArray *gender;
+    
+    NSUInteger banks;
+    NSUInteger lands;
+    NSUInteger keyboardHeight;
 
+    UIView *datePickerView;
+}
 
+@property (nonatomic, assign) NSUInteger formID;
 @end
 

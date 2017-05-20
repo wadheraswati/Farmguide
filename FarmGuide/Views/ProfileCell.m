@@ -10,6 +10,7 @@
 
 @implementation ProfileCell
 @synthesize nameLbl, valueField;
+@synthesize addBtn;
 @synthesize type;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -22,6 +23,11 @@
         [nameLbl setTextColor:[UIColor blackColor]];
         [nameLbl setNumberOfLines:1];
         [self addSubview:nameLbl];
+        
+        addBtn = [UIButton buttonWithType:UIButtonTypeContactAdd];
+        [addBtn sizeToFit];
+        [addBtn setFrame:CGRectMake(self.bounds.size.width - addBtn.bounds.size.width - 10, 10, addBtn.bounds.size.width, addBtn.bounds.size.height)];
+        //[self addSubview:addBtn];
         
         valueField = [[UITextField alloc] initWithFrame:CGRectMake(5, nameLbl.frame.origin.y + nameLbl.frame.size.height + 5, self.bounds.size.width - 10, 25)];
         [valueField setFont:[UIFont systemFontOfSize:15]];
@@ -42,6 +48,7 @@
     [nameLbl setFrame:CGRectMake(5, 5, self.bounds.size.width - 10, 25)];
     [valueField setFrame:CGRectMake(5, nameLbl.frame.origin.y + nameLbl.frame.size.height + 5, self.bounds.size.width - 10, 25)];
     [lineView setFrame:CGRectMake(valueField.frame.origin.x, valueField.frame.origin.y + valueField.frame.size.height, valueField.frame.size.width, 1)];
+    [addBtn setFrame:CGRectMake(self.bounds.size.width - addBtn.bounds.size.width - 10, 10, addBtn.bounds.size.width, addBtn.bounds.size.height)];
 }
 
 

@@ -21,6 +21,11 @@
     self.navigationItem.title = @"MAP";
     items = [NSArray arrayWithObjects:@"Origin", @"Destination", nil];
     
+    NSDictionary *barButtonAttributes = @{NSFontAttributeName: [UIFont fontWithName:@"googleicon" size:21.0f], NSForegroundColorAttributeName: kTertiaryBlackColor};
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
+    [backButton setTitleTextAttributes:barButtonAttributes forState:UIControlStateNormal];
+    self.navigationItem.leftBarButtonItem = backButton;
+    
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width - 100, 200)];
     self.tableView.backgroundColor = kPrimaryWhiteColor;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -109,11 +114,11 @@
     [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error){
         if(error == nil) {
             MKRoute *route = [response.routes firstObject];
-            CLLocationCoordinate2D locations[route.steps.count];
-            for(int i = 0; i < route.steps.count; i++)
-                locations[i] = (route.steps[i]).polyline.coordinate;
-            polyline = [MKPolyline polylineWithCoordinates:locations count:route.steps.count];
-            [self.mapView addOverlay:polyline level:MKOverlayLevelAboveRoads];
+            //CLLocationCoordinate2D locations[route.steps.count];
+            //for(int i = 0; i < route.steps.count; i++)
+              //  locations[i] = (route.steps[i]).polyline.coordinate;
+            //polyline = [MKPolyline polylineWithCoordinates:locations count:route.steps.count];
+            [self.mapView addOverlay:route.polyline level:MKOverlayLevelAboveRoads];
             [self.mapView setNeedsDisplay];
         }
         else
@@ -125,7 +130,7 @@
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id <MKOverlay>)overlay {
 
-    MKPolylineRenderer *render = [[MKPolylineRenderer alloc] initWithPolyline:polyline];
+    MKPolylineRenderer *render = [[MKPolylineRenderer alloc] initWithOverlay:overlay];
     render.strokeColor = [UIColor greenColor];
     render.lineWidth = 4.0;
     return render;
@@ -280,6 +285,9 @@
     [locationView addSubview:locationTableView];
 }
 
+- (void)goBack {
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
 
 #pragma mark - UITextFieldDelegate Methods -
 
